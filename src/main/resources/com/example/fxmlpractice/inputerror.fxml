@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="107.0" prefWidth="373.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.fxmlpractice.InputErrorController">
+   <children>
+      <Button fx:id="btnClose" alignment="CENTER" layoutX="129.0" layoutY="66.0" mnemonicParsing="false" onAction="#closeWindow" prefHeight="26.0" prefWidth="115.0" text="Close" textAlignment="CENTER" AnchorPane.bottomAnchor="14.600000000000001" AnchorPane.leftAnchor="129.0" AnchorPane.rightAnchor="128.8" />
+      <Label fx:id="lbError" layoutX="173.0" layoutY="29.0" text="Error" textAlignment="CENTER" />
+   </children>
+</AnchorPane>

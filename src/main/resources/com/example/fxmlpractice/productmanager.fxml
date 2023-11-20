@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.fxmlpractice.ProductManagerController">
+    <children>
+        <TableView fx:id="productTable" editable="true" layoutX="14.0" layoutY="14.0" prefHeight="338.0" prefWidth="571.0">
+            <columns>
+                <TableColumn fx:id="productColumn" prefWidth="338.800012588501" text="Product Name" />
+                <TableColumn fx:id="priceColumn" minWidth="6.199981689453125" prefWidth="123.0" text="Price" />
+                <TableColumn fx:id="quantityColumn" prefWidth="109.00003051757812" text="Quantity" />
+            </columns>
+        </TableView>
+        <TextField fx:id="productInput" layoutX="23.0" layoutY="361.0" promptText="Product Name" />
+        <TextField fx:id="priceInput" layoutX="180.0" layoutY="361.0" prefHeight="26.0" prefWidth="75.0" promptText="Price" />
+        <TextField fx:id="quantityInput" layoutX="262.0" layoutY="361.0" prefHeight="26.0" prefWidth="75.0" promptText="Quantity" />
+        <Button fx:id="clearButton" layoutX="352.0" layoutY="361.0" mnemonicParsing="false" onAction="#clear" prefHeight="26.0" prefWidth="66.0" text="Clear" />
+        <Button fx:id="deleteButton" layoutX="430.0" layoutY="361.0" mnemonicParsing="false" onAction="#delete" prefHeight="26.0" prefWidth="66.0" text="Delete" />
+        <Button fx:id="saveButton" layoutX="507.0" layoutY="361.0" mnemonicParsing="false" onAction="#add" prefHeight="26.0" prefWidth="66.0" text="Save" />
+    </children>
+</AnchorPane>
