@@ -29,6 +29,7 @@ public class InputErrorView {
             stage.setScene(scene);
             stage.setResizable(false);
             stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Error!");
             stage.showAndWait();
         }catch(IOException e){
             System.err.println(e.getMessage());

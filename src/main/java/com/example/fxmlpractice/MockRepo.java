@@ -3,13 +3,12 @@ package com.example.fxmlpractice;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MockRepo implements ProductRepository
-{
+public class MockRepo implements ProductRepository {
 
     public List<Product> products = List.of(
-            new Product("Reimu doll", 5000.00, 4),
-            new Product("Marisa plush", 3000.00, 9),
-            new Product("PC98 Reimu", 10000.00, 2)
+            new Product(1, "Reimu doll", 5000.00, 4),
+            new Product(2, "Marisa plush", 3000.00, 9),
+            new Product(3, "PC98 Reimu", 10000.00, 2)
     );
 
     @Override
@@ -17,7 +16,23 @@ public class MockRepo implements ProductRepository
         return products;
     }
 
-    public void update(List<Product> list){
-        products = list;
+    @Override
+    public Product findOne(int Id) {
+        return null;
+    }
+
+    @Override
+    public void add(Product p) {
+
+    }
+
+    @Override
+    public void update(Product p) {
+
+    }
+
+    @Override
+    public void remove(int Id) {
+
     }
 }

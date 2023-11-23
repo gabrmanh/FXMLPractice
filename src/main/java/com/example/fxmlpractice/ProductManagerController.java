@@ -19,7 +19,7 @@ public class ProductManagerController {
     @FXML private TextField quantityInput;
 
     private ObservableList<Product> observableList;
-    private ProductRepository mockRepo = new MockRepo();
+    private ProductRepository repo = new SQLiteRepository();
 
     public void bindColumnsToProperties(){
         productColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -33,7 +33,7 @@ public class ProductManagerController {
     }
 
     private void loadInitialData(){
-        List<Product> products = mockRepo.findAll();
+        List<Product> products = repo.findAll();
         observableList.clear();
         observableList.addAll(products);
     }
@@ -57,19 +57,30 @@ public class ProductManagerController {
             double price = Double.parseDouble(priceInput.getText());
             int quantity = Integer.parseInt(quantityInput.getText());
 
-            observableList.add(new Product(productInput.getText(), price, quantity));
-            mockRepo.update(observableList);
+            System.out.println(observableList.size());
+            System.out.println("-");
+            Product p = new Product(observableList.size()+1,productInput.getText(), price, quantity);
+            System.out.println(observableList.size());
+
+            observableList.add(p);
+            repo.add(p);
         } catch (Exception e){
             InputErrorView inputErrorView = new InputErrorView();
             inputErrorView.show(e);
         }
     }
 
+    public void update(){
+        //use mouse to get index, use index to get product, open new window to update it
+        //pain
+        //or not man he wants it to be done by clicked product?? what the fuck ever
+    }
+
     public void delete() {
         try {
             int index = productTable.getSelectionModel().getSelectedIndex();
             observableList.remove(index);
-            mockRepo.update(observableList);
+            repo.remove(index+1); //this is so fucked up lmao
         } catch (Exception e){
             InputErrorView inputErrorView = new InputErrorView();
             inputErrorView.show(e);
@@ -77,8 +88,9 @@ public class ProductManagerController {
     }
 
     public void clear(){
-        observableList.clear();
-        mockRepo.update(observableList);
+        productInput.clear();
+        priceInput.clear();
+        quantityInput.clear();
     }
 
 

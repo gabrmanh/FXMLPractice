@@ -6,5 +6,8 @@ import java.util.List;
 
 public interface ProductRepository {
     List<Product> findAll();
-    void update(List<Product> List);
+    Product findOne(int id);
+    void add(Product p);
+    void update(Product p);
+    void remove(int id);
 }
