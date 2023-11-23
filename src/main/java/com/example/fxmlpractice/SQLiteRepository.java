@@ -67,7 +67,7 @@ public class SQLiteRepository implements ProductRepository{
 
     @Override
     public void update(Product p) {
-        String sql = "UPDATE product SET name = ?, price = ?, quantity = ? WHERE code = ?";
+        String sql = "UPDATE product SET name = ?, price = ?, quantity = ? WHERE id = ?";
 
         try(Connection conn = DriverManager.getConnection("jdbc:sqlite:src/main/java/com/example/fxmlpractice/products.db");
             PreparedStatement stmt = conn.prepareStatement(sql)){

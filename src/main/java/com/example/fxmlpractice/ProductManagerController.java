@@ -45,7 +45,7 @@ public class ProductManagerController {
         loadInitialData();
     }
 
-    public void add(){
+    public void save(){
         try {
             if (productInput.getText().isEmpty())
                 throw new InvalidInputException("Product Name may not be null.");
@@ -57,30 +57,40 @@ public class ProductManagerController {
             double price = Double.parseDouble(priceInput.getText());
             int quantity = Integer.parseInt(quantityInput.getText());
 
-            System.out.println(observableList.size());
-            System.out.println("-");
-            Product p = new Product(observableList.size()+1,productInput.getText(), price, quantity);
-            System.out.println(observableList.size());
+            if(getProductWhenClicked() != null){
+                Product newProduct = new Product(getProductWhenClicked().getId(), productInput.getText(),
+                        price, quantity);
 
-            observableList.add(p);
+                repo.update(newProduct);
+
+                int index = productTable.getSelectionModel().getSelectedIndex();
+                observableList.set(index,newProduct);
+
+                productTable.refresh();
+                return;
+            }
+
+            Product p = new Product(observableList.size()+1,productInput.getText(), price, quantity);
+
             repo.add(p);
+            observableList.add(p);
         } catch (Exception e){
             InputErrorView inputErrorView = new InputErrorView();
             inputErrorView.show(e);
         }
     }
 
-    public void update(){
-        //use mouse to get index, use index to get product, open new window to update it
-        //pain
-        //or not man he wants it to be done by clicked product?? what the fuck ever
+    public Product getProductWhenClicked(){
+        int index = productTable.getSelectionModel().getSelectedIndex();
+        if(index < 0) return null;
+        return observableList.get(index);
     }
 
     public void delete() {
         try {
             int index = productTable.getSelectionModel().getSelectedIndex();
+            repo.remove(observableList.get(index).getId());
             observableList.remove(index);
-            repo.remove(index+1); //this is so fucked up lmao
         } catch (Exception e){
             InputErrorView inputErrorView = new InputErrorView();
             inputErrorView.show(e);
