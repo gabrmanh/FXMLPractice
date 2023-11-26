@@ -3,7 +3,8 @@ package com.example.fxmlpractice;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MockRepo implements ProductRepository {
+public class MockRepo implements ProductRepository { //used before the db implementation
+    //im gonna leave it until next update for posterity lol
 
     public List<Product> products = List.of(
             new Product(1, "Reimu doll", 5000.00, 4),
@@ -23,7 +24,6 @@ public class MockRepo implements ProductRepository {
 
     @Override
     public void add(Product p) {
-
     }
 
     @Override

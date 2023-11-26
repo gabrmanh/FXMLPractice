@@ -54,8 +54,17 @@ public class ProductManagerController {
             if (quantityInput.getText().isEmpty())
                 throw new InvalidInputException("Product Quantity may not be null.");
 
-            double price = Double.parseDouble(priceInput.getText());
-            int quantity = Integer.parseInt(quantityInput.getText());
+            double price;
+            int quantity;
+
+            try{
+
+                price = Double.parseDouble(priceInput.getText());
+                quantity = Integer.parseInt(quantityInput.getText());
+
+            }catch (Exception e){
+                throw new InvalidInputException("The values for the price and the quantity have to be numbers.");
+            }
 
             if(getProductWhenClicked() != null){
                 Product newProduct = new Product(getProductWhenClicked().getId(), productInput.getText(),

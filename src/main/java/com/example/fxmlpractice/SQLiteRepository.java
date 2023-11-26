@@ -5,14 +5,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SQLiteRepository implements ProductRepository{
+    private final SQLiteConnectionFactory sqLiteConnectionFactory = new SQLiteConnectionFactory();
 
     @Override
     public List<Product> findAll() {
         List<Product> list = new ArrayList<>();
         String sql = "SELECT * FROM product";
 
-        try(Connection conn = DriverManager.getConnection("jdbc:sqlite:src/main/java/com/example/fxmlpractice/products.db");
-            PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try(PreparedStatement stmt = sqLiteConnectionFactory.createPreparedStatement(sql)) {
 
             ResultSet rs = stmt.executeQuery();
 
@@ -31,8 +31,7 @@ public class SQLiteRepository implements ProductRepository{
         Product p = null;
         String sql = "SELECT * FROM product WHERE id = ?";
 
-        try(Connection conn = DriverManager.getConnection("jdbc:sqlite:src/main/java/com/example/fxmlpractice/products.db");
-            PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try(PreparedStatement stmt = sqLiteConnectionFactory.createPreparedStatement(sql)) {
 
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
@@ -51,8 +50,7 @@ public class SQLiteRepository implements ProductRepository{
     public void add(Product p) {
         String sql = "INSERT INTO product (id, name, price, quantity) values (?,?,?,?)";
 
-        try(Connection conn = DriverManager.getConnection("jdbc:sqlite:src/main/java/com/example/fxmlpractice/products.db");
-            PreparedStatement stmt = conn.prepareStatement(sql)){
+        try(PreparedStatement stmt = sqLiteConnectionFactory.createPreparedStatement(sql)){
 
             stmt.setInt(1, p.getId());
             stmt.setString(2, p.getName());
@@ -69,8 +67,7 @@ public class SQLiteRepository implements ProductRepository{
     public void update(Product p) {
         String sql = "UPDATE product SET name = ?, price = ?, quantity = ? WHERE id = ?";
 
-        try(Connection conn = DriverManager.getConnection("jdbc:sqlite:src/main/java/com/example/fxmlpractice/products.db");
-            PreparedStatement stmt = conn.prepareStatement(sql)){
+        try(PreparedStatement stmt = sqLiteConnectionFactory.createPreparedStatement(sql)){
 
             stmt.setString(1, p.getName());
             stmt.setDouble(2, p.getPrice());
@@ -87,8 +84,7 @@ public class SQLiteRepository implements ProductRepository{
     public void remove(int id) {
         String sql = "DELETE FROM product WHERE id = ?";
 
-        try(Connection conn = DriverManager.getConnection("jdbc:sqlite:src/main/java/com/example/fxmlpractice/products.db");
-            PreparedStatement stmt = conn.prepareStatement(sql)){
+        try(PreparedStatement stmt = sqLiteConnectionFactory.createPreparedStatement(sql)){
 
             stmt.setInt(1, id);
             stmt.executeUpdate();

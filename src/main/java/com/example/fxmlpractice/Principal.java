@@ -5,8 +5,7 @@ public class Principal {
         Product product = new Product(0,"new", 333.00, 111);
         SQLiteRepository sqLiteRepository = new SQLiteRepository();
 
-        sqLiteRepository.remove(7);
-
+        sqLiteRepository.remove(0);
         System.out.println(sqLiteRepository.findAll());
     }
 }
